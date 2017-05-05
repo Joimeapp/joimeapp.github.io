@@ -1,17 +1,15 @@
 ---
 layout: default
-title: Joime Developer Portal | Content
-permalink: /api/content/
+title: Joime Developer Portal | Spaces
+permalink: /api/spaces/
 ---
 
-## Content
+## Space
 <hr />
-### List Content
+### List Spaces
 <pre>
-<b>GET</b> /content
+<b>GET</b> /space
 </pre>
-
-List content which has starting location within the radius from the provided coordinates. Use case for the app: show all trips near me.
 
 #### Parameters
 
@@ -24,14 +22,12 @@ per_page | The number of records to return (default: 10) | Integer
 radius | Radius around location default(20) in Miles | Integer 
 activity_id | default(0) - get content from specific activity id | Integer 
 sort | sort content with one of the fields. default(start_date) | String
-order| order sorted results. default(ASC), or DESC | String
+order| order sorted resulsts. default(ASC), or DESC | String
 
-### List Content for user
+### List Spaces for user
 <pre>
-<b>GET</b> /content/user
+<b>GET</b> /space/user
 </pre>
-
-Show content that authorized user posted and content where authorized user is an attendant.
 
 #### Headers
 
@@ -46,35 +42,11 @@ Parameter | Function | Type
 --------- | -------- | ----
 page | The page number of records to return (Example: 1) | Integer
 per_page | The number of records to return (Example: 10) | Integer
-
-### List Content from user spaces
-<pre>
-<b>GET</b> /content/spaces
-</pre>
-
-Show all content from spaces that user joined.
-
-#### Headers
-
-Key | Value 
---------- | -------- 
-device-id    | UUID of an authorized device 
-auth-token   | Valid token for the device
-
-#### Parameters
-
-Parameter | Function | Type
---------- | -------- | ----
-page | The page number of records to return (Example: 1) | Integer
-per_page | The number of records to return (Example: 10) | Integer
-
 
 ### List Content from space
 <pre>
 <b>GET</b> /content/space/{space-code}
 </pre>
-
-Show content from a single space.
 
 #### Parameters
 
@@ -104,64 +76,13 @@ event.price_per_seat | Price for each seat | Integer
 event.space | If of a space for a trip | Integer
 event.activity_id | Id of activity for a trip | Integer
 event.waiting | Should always be false | Boolean
-event.zoom | Zoom of an image that is shown on the web, default 14 | Integer
+event.zoom | Zoon of an image that is shown on the web, default 14 | Integer
 event.addressObject | JSON Object with the following fields | JSON
 event.addressObject.latitude | Latitude of an address | Double
 event.addressObject.longitude | Longitude of an address | Double
 event.addressObject.formatAddress | Full formatted address | String
 event.addressObject.locationType | Data that is coming from google | String
 event.addressObject.image | Url to an image that is shown on a web | String
-
-### Edit a Content
-<pre><b>PUT</b> /content/{contentId}</pre>
-
-In order to edit a trip 
-* User needs to be authorized 
-* Content need to belong to a user
-* space_code is required 
-* user has to be part of the new space
-
-#### Headers
-
-Key | Value 
---------- | -------- 
-device-id    | UUID of an authorized device 
-auth-token   | Valid token for the device
-
-#### Parameters
-
-Parameter | Function | Type
---------- | -------- | ----
-class_id | 5 - I'm Going or 9 - Pick up | Int
-content_text | Message that user typed | String
-space_code | The description of the video | String
-event | JSON Object with the following fields | JSON
-event.allday | If event is all day or not | Boolean
-event.driving | Is driving or picking up | Boolean
-event.start_date | Start date of the trip | Date
-event.end_date | End date of the trip | Date
-event.number_of_seats | Number of total seats | Integer
-event.price_per_seat | Price for each seat | Integer
-event.space | If of a space for a trip | Integer
-event.activity_id | Id of activity for a trip | Integer
-event.waiting | Should always be false | Boolean
-event.zoom | Zoom of an image that is shown on the web, default 14 | Integer
-event.addressObject | JSON Object with the following fields | JSON
-event.addressObject.latitude | Latitude of an address | Double
-event.addressObject.longitude | Longitude of an address | Double
-event.addressObject.formatAddress | Full formatted address | String
-event.addressObject.locationType | Data that is coming from google | String
-event.addressObject.image | Url to an image that is shown on a web | String
-
-### Delete a Content
-<pre><b>DELETE</b> /content/{contentId}</pre>
-
-#### Headers
-
-Key | Value 
---------- | -------- 
-device-id    | UUID of an authorized device 
-auth-token   | Valid token for the device
 
 
 ### Content Object
