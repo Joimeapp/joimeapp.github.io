@@ -93,7 +93,7 @@ Parameter | Function | Type
 --------- | -------- | ----
 class_id | 5 - I'm Going or 9 - Pick up | Int
 content_text | Message that user typed | String
-space_code | The description of the video | String
+space_code | Code of the space where the trip is heading to. Example: plumb-beach | String
 event | JSON Object with the following fields | JSON
 event.allday | If event is all day or not | Boolean
 event.driving | Is driving or picking up | Boolean

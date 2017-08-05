@@ -6,10 +6,19 @@ permalink: /api/spaces/
 
 ## Space
 <hr />
-### List Spaces
+### Get spaces near location
 <pre>
 <b>GET</b> /space
 </pre>
+
+Get spaces which are located within the radius from the provided coordinates. Use case for the app: show all spaces near me.
+
+#### Headers
+
+Key | Value 
+--------- | -------- 
+device-id    | UUID of an authorized device.(optinal)
+auth-token   | Valid token for the device.(optinal)
 
 #### Parameters
 
@@ -20,14 +29,17 @@ Parameter | Function | Type
 page | The page number of records to return (default: 1) | Integer 
 per_page | The number of records to return (default: 10) | Integer 
 radius | Radius around location default(20) in Miles | Integer 
-activity_id | default(0) - get content from specific activity id | Integer 
-sort | sort content with one of the fields. default(start_date) | String
+activities | Fet spaces with specific activities. Default is to show all resutls. Example: [1,2] | Array[Int]]   
+exclude_user_id | Hide videos that user is part of. | Integer
+sort | sort content with one of the fields. default(title) | String
 order| order sorted resulsts. default(ASC), or DESC | String
 
-### List Spaces for user
+### Get Spaces for user
 <pre>
-<b>GET</b> /space/user
+<b>GET</b> /space/user/{user_id}
 </pre>
+
+Get spaces that user is part of. Use case for the app: show my spaces screen
 
 #### Headers
 
@@ -40,12 +52,11 @@ auth-token   | Valid token for the device
 
 Parameter | Function | Type
 --------- | -------- | ----
-page | The page number of records to return (Example: 1) | Integer
-per_page | The number of records to return (Example: 10) | Integer
 
-### List Content from space
+
+### Get Space
 <pre>
-<b>GET</b> /content/space/{space-code}
+<b>GET</b> /space/{space-code}
 </pre>
 
 #### Parameters
@@ -56,7 +67,7 @@ page | The page number of records to return (Example: 1) | Integer
 per_page | The number of records to return (Example: 10) | Integer
 
 
-### Create a Content
+### Create a Space
 <pre><b>POST</b> /content</pre>
 
 #### Parameters
@@ -85,66 +96,41 @@ event.addressObject.locationType | Data that is coming from google | String
 event.addressObject.image | Url to an image that is shown on a web | String
 
 
-### Content Object
+### Space Object
 <pre>
     {
-      "id": 3,
-      "created_at": "2017-04-04 23:31:32",
-      "updated_at": "2017-04-04 23:31:32",
-      "space_id": 12,
-      "user_id": 2,
-      "updated_by": 2,
-      "content_text": "Lets goo",
-      "class_id": 5,
-      "content_data": null,
-      "shared_from_id": null,
-      "address_id": 2,
-      "privacy": 0,
-      "activity_id": 2,
-      "start_date": "2017-04-12 05:00:00",
-      "end_date": "2017-04-12 05:00:00",
-      "all_day": 0,
-      "driving": 1,
-      "number_of_seats": 1,
-      "price_per_seat": 15,
-      "deleted_at": null,
-      "address": {
-        "id": 2,
-        "created_at": "2017-02-24 00:29:42",
-        "updated_at": "2017-02-24 00:29:42",
-        "latitude": 40.70884,
-        "longitude": -74.00517,
-        "format_address": "64 Fulton St, New York",
-        "location_type": "",
-        "image": "https://maps.google.com/maps/api/staticmap?center=64 Fulton St, New York&zoom=16&size=600x400&sensor=false&markers=64 Fulton St, New York"
-      },
-      "space": {
-        "id": 12,
-        "created_at": "2014-12-30 21:29:42",
-        "updated_at": "2014-12-30 21:29:42",
-        "code": "far-rockway",
-        "title": "Far rockway",
-        "description": "The closest surfing beach to nyc, the crowds are more challenging here than the waves. Average beachbreaks that need a sizable swell to make it in here with big e swells bringing some decent lefts.",
-        "active": 1,
-        "access": "PU",
-        "options": {
-          "features": []
-        },
-        "user_id": 1,
-        "lat": "40.58377878530724",
-        "lng": "-73.81067253649235",
-        "address": "101-89 shore front pkwy, rockaway park, ny 11694",
-        "category": ""
-      },
-      "user": {
-        "id": 2,
-        "full_name": "Iteny Potamkin",
-        "code": "ItenyPotamkin",
-        "thumb_url": "assets/avatar/thumbs/148790370458af9bd844351.jpg",
-        "photo_url": "assets/avatar/148790370458af9bd844351.jpg"
-      },
-      "attendants": []
-    }
+            "id": 20,
+            "created_at": "2015-09-28 12:28:04",
+            "updated_at": "2015-09-28 18:58:49",
+            "code": "brooklyn-boulders",
+            "title": "Brooklyn boulders",
+            "description": "\"a good space with many routes and challenges for a wide variety of skill levels.\"",
+            "active": 1,
+            "access": "PU",
+            "options": {
+                "features": []
+            },
+            "user_id": 4,
+            "lat": "40.679653",
+            "lng": "-73.98438",
+            "address": "575 Degraw St, Brooklyn, NY 11217",
+            "category": "",
+            "activities": [
+                {
+                    "id": 10,
+                    "created_at": "-0001-11-30 00:00:00",
+                    "updated_at": "-0001-11-30 00:00:00",
+                    "code": "rock-climbing",
+                    "title": "Rock Climbing",
+                    "icon": "assets/icons/rock-climbing_icon.png",
+                    "description": "Rock Climbing",
+                    "active": 1,
+                    "pivot": {
+                        "space_id": 20,
+                        "activity_id": 10
+                    }
+                }
+         
 </pre>
 
 
